@@ -1,0 +1,110 @@
+/* General Styling */
+body {
+    font-family: Georgia, 'Times New Roman', Times, serif, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #00d9ff; /* Light background color for better readability */
+    color: #333; /* Default text color */
+}
+
+/* Header Styling */
+header {
+    background-color: #004080; /* Navy blue banner */
+    color: white; /* White text */
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Adds a shadow for depth */
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5em;
+}
+
+header nav a {
+    color: #ffd700; /* Gold links */
+    text-decoration: none;
+    font-weight: bold;
+    margin: 0 10px;
+}
+
+header nav a:hover {
+    text-decoration: underline;
+}
+
+/* Section Styling */
+section {
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #ffffff; /* White background for sections */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+section#about {
+    border-left: 6px solid #007bff; /* Blue accent for About section */
+}
+
+section#rules {
+    border-left: 6px solid #28a745; /* Green accent for Rules section */
+}
+
+section#video {
+    border-left: 6px solid #dc3545; /* Red accent for Video section */
+}
+
+section#graph {
+    border-left: 6px solid #ffc107; /* Yellow accent for Graph section */
+}
+
+/* Text Coloring */
+h2 {
+    color: #004080; /* Navy blue headings */
+    font-size: 1.8em;
+    margin-bottom: 10px;
+}
+
+p {
+    color: #555; /* Subtle gray for paragraph text */
+    line-height: 1.6;
+}
+
+ol, ul {
+    margin-left: 20px;
+    color: #230085; /* Default list item color */
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+/* Image Styling */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 20px auto;
+    border: 3px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Footer Styling */
+footer {
+    background-color: #004080; /* Navy blue banner */
+    color: white; /* White text */
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 20px;
+    position: relative;
+}
+
+/* Links Inside Sections */
+section a {
+    color: #007bff; /* Blue links */
+    text-decoration: none;
+}
+
+section a:hover {
+    text-decoration: underline;
+}

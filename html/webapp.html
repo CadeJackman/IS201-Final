@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <a href="scratchpaper.html">Go to Rugby Website</a>
+       
+    <a href="../index.html">Go to Resume</a>
+    
+  
+  
+  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake Game</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #00c3ff;
+            color: white;
+            height: 100vh;
+        }
+
+        canvas {
+            border: 1px solid white;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #21a1f1;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="gameCanvas" width="400" height="400"></canvas>
+    <button id="restartButton" style="display: none;">Restart</button>
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const restartButton = document.getElementById('restartButton');
+
+        const boxSize = 20;
+        const canvasSize = canvas.width / boxSize;
+
+        let snake = [{ x: 10, y: 10 }];
+        let food = { x: Math.floor(Math.random() * canvasSize), y: Math.floor(Math.random() * canvasSize) };
+        let direction = 'RIGHT';
+        let gameInterval;
+
+        function drawRect(x, y, color) {
+            ctx.fillStyle = color;
+            ctx.fillRect(x * boxSize, y * boxSize, boxSize, boxSize);
+        }
+
+        function drawGame() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            snake.forEach((segment, index) => {
+                drawRect(segment.x, segment.y, index === 0 ? 'lime' : 'white');
+            });
+
+            drawRect(food.x, food.y, 'red');
+        }
+
+        function moveSnake() {
+            const head = { ...snake[0] };
+
+            if (direction === 'UP') head.y -= 1;
+            if (direction === 'DOWN') head.y += 1;
+            if (direction === 'LEFT') head.x -= 1;
+            if (direction === 'RIGHT') head.x += 1;
+
+            // Check for collisions
+            if (
+                head.x < 0 || head.y < 0 || head.x >= canvasSize || head.y >= canvasSize ||
+                snake.some(segment => segment.x === head.x && segment.y === head.y)
+            ) {
+                endGame();
+                return;
+            }
+
+            snake.unshift(head);
+
+            if (head.x === food.x && head.y === food.y) {
+                food = { x: Math.floor(Math.random() * canvasSize), y: Math.floor(Math.random() * canvasSize) };
+            } else {
+                snake.pop();
+            }
+
+            drawGame();
+        }
+
+        function changeDirection(event) {
+            if (event.key === 'ArrowUp' && direction !== 'DOWN') direction = 'UP';
+            if (event.key === 'ArrowDown' && direction !== 'UP') direction = 'DOWN';
+            if (event.key === 'ArrowLeft' && direction !== 'RIGHT') direction = 'LEFT';
+            if (event.key === 'ArrowRight' && direction !== 'LEFT') direction = 'RIGHT';
+        }
+
+        function startGame() {
+            direction = 'RIGHT';
+            snake = [{ x: 10, y: 10 }];
+            food = { x: Math.floor(Math.random() * canvasSize), y: Math.floor(Math.random() * canvasSize) };
+            restartButton.style.display = 'none';
+            gameInterval = setInterval(moveSnake, 100);
+        }
+
+        function endGame() {
+            clearInterval(gameInterval);
+            restartButton.style.display = 'block';
+        }
+
+        document.addEventListener('keydown', changeDirection);
+        restartButton.addEventListener('click', startGame);
+
+        startGame();
+    </script>
+</body>
+</html>
